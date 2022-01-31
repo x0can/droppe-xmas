@@ -7,7 +7,7 @@ const Navbar = () => {
     <Box
       height="10vh"
       width="100vw"
-      borderBottom="3px solid black"
+      borderBottom="10px solid green"
       bgColor="white"
       position="absolute"
       top="0"

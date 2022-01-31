@@ -3,14 +3,14 @@ import { Flex, Box } from "@chakra-ui/react";
 const NavButton = ({ text }) => {
   return (
     <Box
-      padding="25px"
+      padding="15px"
       width="30%"
-      bgColor="black"
+      bgColor="orange.800"
       cursor="pointer"
-      margin="0 2px"
+      margin="0 3px 5px 3px"
       sx={{
         "&:hover": {
-          bg: "gray",
+          bg: "green.800",
         },
       }}
     >
