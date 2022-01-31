@@ -1,5 +1,5 @@
-import BodyPage from "../components/bodyPage";
 import LandingPage from "../components/landingPage";
+import BodyPage from "../components/bodyPage";
 
 const Home = () => {
   return (
