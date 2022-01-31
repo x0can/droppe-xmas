@@ -24,7 +24,7 @@ const theme = extendTheme({
       700: "#F57C00",
       800: "#EF6C00",
       900: "#E65100",
-    }
+    },
   },
   components: {
     Button: {

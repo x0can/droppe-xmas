@@ -19,7 +19,7 @@ const Navbar = () => {
           </Flex>
         </Box>
         <Box width="20%">
-          <NextImage src="/hlt.svg" height="80px" width="220px" />
+          <NextImage src="/diet.svg" height="80px" width="220px" />
         </Box>
         <Box width="40%">
           <Flex justify="right" align="right" color="white">

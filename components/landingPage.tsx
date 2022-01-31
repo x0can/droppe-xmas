@@ -3,18 +3,18 @@ import Navbar from "./navBar";
 
 const LandingPage = ({ children }) => {
   return (
-    <Box overflowX="hidden">
+    <Flex top="0">
       <Navbar />
-      <Flex
-        padding="20px"
-        align="center"
-        justify="center"
-        height="100vh"
+      <Box
+        overflowX="hidden"
         bgColor="orange.900"
+        height="50vh"
+        padding="30px"
+        width="100vw"
       >
-        <Box margin="0">{children}</Box>
-      </Flex>
-    </Box>
+        {children}
+      </Box>
+    </Flex>
   );
 };
 
