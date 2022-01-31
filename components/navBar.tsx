@@ -5,7 +5,7 @@ import NavButton from "./navButton";
 const Navbar = () => {
   return (
     <Box
-      height="10vh"
+      height="11vh"
       width="100vw"
       borderBottom="10px solid green"
       bgColor="white"
