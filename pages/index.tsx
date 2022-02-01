@@ -24,6 +24,7 @@ const Home = () => {
   }, [addAllCarts, cart]);
 
   const handleSubmit = (item) => {
+    setCheckOrder(true);
     allPurchases.push(item);
     addPurchase(allPurchases);
     setApproved(item);
@@ -39,19 +40,14 @@ const Home = () => {
     }
   };
 
-  const handleCheck = (bool) => {
-    setCheckOrder(bool);
+  const handleCheck = () => {
     setOrders(allPurchases);
   };
 
   return (
-    <LandingPage
-      carts={arrayReducer(carts)}
-      approved={approved}
-      handleSubmit={handleSubmit}
-    >
+    <LandingPage carts={arrayReducer(carts)} handleSubmit={handleSubmit}>
       <Flex align="center" justify="center" padding="20px">
-        {orders ? (
+        {allPurchases ? (
           <CheckButton text="CHECK ORDER" handleCheck={handleCheck} />
         ) : (
           ""

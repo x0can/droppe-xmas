@@ -14,7 +14,7 @@ const OrderTable = ({ orders }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {orders.map((order, i) => (
+        {orders?.map((order, i) => (
           <Tr
             sx={{
               transition: "all .3s",

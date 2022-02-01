@@ -4,7 +4,7 @@ import { Box, Flex } from "@chakra-ui/layout";
 import { ListItem, UnorderedList } from "@chakra-ui/react";
 import MainButton from "./button";
 
-const ProductBox = ({ items, approved, handleSubmit }) => {
+const ProductBox = ({ items, handleSubmit }) => {
   return (
     <Box width="20vw" height="38vh" bgColor="gray.100" margin="5px">
       <Flex align="center" justify="center" padding="60px">
@@ -13,11 +13,7 @@ const ProductBox = ({ items, approved, handleSubmit }) => {
           <ListItem>products: {items.products.length}</ListItem>
         </UnorderedList>
       </Flex>
-      {approved?.id === items.id ? (
-        ""
-      ) : (
-        <MainButton text="APPROVE" handleSubmit={handleSubmit} item={items} />
-      )}
+      <MainButton text="APPROVE" handleSubmit={handleSubmit} item={items} />
     </Box>
   );
 };
