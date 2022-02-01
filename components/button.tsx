@@ -5,12 +5,12 @@ const MainButton = ({ text, handleSubmit, item }) => {
     <Box
       padding="25px"
       width="80%"
-      bgColor="orange.800"
+      bgColor="green.800"
       cursor="pointer"
-      margin="35px"
+      margin="23px"
       sx={{
         "&:hover": {
-          bg: "green.800",
+          bg: "orange.800",
         },
       }}
       onClick={() => handleSubmit(item)}

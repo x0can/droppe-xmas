@@ -1,19 +1,17 @@
 import { Flex, Box } from "@chakra-ui/react";
 
-const CheckButton = ({ text, handleCheck }) => {
+const MessageBox = ({ text }) => {
   return (
     <Box
       padding="25px"
-      width="20%"
-      bgColor="green.800"
-      cursor="pointer"
-      margin="35px"
+      width="80%"
+      bgColor="orange.500"
+      margin="23px"
       sx={{
         "&:hover": {
           bg: "orange.800",
         },
       }}
-      onClick={() => handleCheck(true)}
     >
       <Flex justify="center" align="center">
         {text}
@@ -22,4 +20,4 @@ const CheckButton = ({ text, handleCheck }) => {
   );
 };
 
-export default CheckButton;
+export default MessageBox;

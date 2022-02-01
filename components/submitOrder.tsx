@@ -1,19 +1,20 @@
 import { Flex, Box } from "@chakra-ui/react";
 
-const CheckButton = ({ text, handleCheck }) => {
+const SubmitButton = ({ text, handleSubmit }) => {
   return (
     <Box
       padding="25px"
       width="20%"
-      bgColor="green.800"
+      bgColor="orange.800"
       cursor="pointer"
       margin="35px"
+      id="orderTable"
       sx={{
         "&:hover": {
-          bg: "orange.800",
+          bg: "green.800",
         },
       }}
-      onClick={() => handleCheck(true)}
+      onClick={handleSubmit}
     >
       <Flex justify="center" align="center">
         {text}
@@ -22,4 +23,4 @@ const CheckButton = ({ text, handleCheck }) => {
   );
 };
 
-export default CheckButton;
+export default SubmitButton;

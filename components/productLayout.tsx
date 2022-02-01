@@ -6,7 +6,7 @@ const ProductLayout = ({ carts, handleSubmit }) => {
   return (
     <Flex padding="20">
       {carts.map((items) => (
-        <Fragment key={items.id}>
+        <Fragment key={items.id || items.userId}>
           <ProductBox items={items} handleSubmit={handleSubmit} />
         </Fragment>
       ))}

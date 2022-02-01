@@ -1,18 +1,7 @@
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { formatDate } from "../lib/formatter";
-import DeleteButton from "./deleteButton";
 
-const OrderTable = ({ orders, handleDelete }) => {
-  useEffect(() => {
-    const element = document.getElementById("orderTable");
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest",
-    });
-  });
-
+const AbandonedTable = ({ orders }) => {
   return (
     <Table variant="styled" backgroundColor="orange.300" width="81.5vw">
       <Thead borderBottom="1px solid" borderColor="rgba(255,255,255,0.2)">
@@ -22,7 +11,6 @@ const OrderTable = ({ orders, handleDelete }) => {
           <Th>DATE</Th>
           <Th>PRODUCTS</Th>
           <Th>APPROVED</Th>
-          <Th />
         </Tr>
       </Thead>
       <Tbody>
@@ -41,9 +29,6 @@ const OrderTable = ({ orders, handleDelete }) => {
             <Td>{formatDate(new Date(order.date))}</Td>
             <Td>{order.products.length}</Td>
             <Td>YES</Td>
-            <Td cursor="pointer">
-              <DeleteButton handleDelete={handleDelete} item={order} />
-            </Td>
           </Tr>
         ))}
       </Tbody>
@@ -51,4 +36,4 @@ const OrderTable = ({ orders, handleDelete }) => {
   );
 };
 
-export default OrderTable;
+export default AbandonedTable;
