@@ -2,10 +2,10 @@ import { Flex } from "@chakra-ui/layout";
 import { Fragment } from "react";
 import ProductBox from "./productBox";
 
-const MealLayout = ({ cart }) => {
+const ProductLayout = ({ carts }) => {
   return (
     <Flex padding="20">
-      {cart.map((items) => (
+      {carts.map((items) => (
         <Fragment key={items.id}>
           <ProductBox items={items} />
         </Fragment>
@@ -14,4 +14,4 @@ const MealLayout = ({ cart }) => {
   );
 };
 
-export default MealLayout;
+export default ProductLayout;

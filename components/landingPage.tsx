@@ -1,20 +1,8 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { useCarts } from "../lib/hooks";
 import ProductLayout from "./productLayout";
 import Navbar from "./navBar";
 
-const LandingPage = ({ children }) => {
-  const { cart } = useCarts();
-
-  const arrayReducer = (arr) => {
-    const { length } = arr;
-    if (length > 5) {
-      arr.length -= 1;
-      return arr;
-    }
-    return arrayReducer(arr);
-  };
-
+const LandingPage = ({ children, carts }) => {
   return (
     <Flex top="0">
       <Navbar />
@@ -26,8 +14,8 @@ const LandingPage = ({ children }) => {
           padding="30px"
           width="100vw"
         >
-          {cart !== undefined ? (
-            <ProductLayout cart={arrayReducer(cart)} />
+          {carts !== undefined ? (
+            <ProductLayout carts={carts} />
           ) : (
             <Box> Waiting for data....</Box>
           )}

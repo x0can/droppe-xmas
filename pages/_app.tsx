@@ -1,5 +1,7 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { StoreProvider } from "easy-peasy";
 import "reset-css";
+import { store } from "../lib/store";
 
 const theme = extendTheme({
   colors: {
@@ -35,7 +37,7 @@ const theme = extendTheme({
       700: "#616161",
       800: "#424242",
       900: "#212121",
-    }
+    },
   },
   components: {
     Button: {
@@ -54,7 +56,9 @@ const theme = extendTheme({
 const MyApp = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <StoreProvider store={store}>
+        <Component {...pageProps} />
+      </StoreProvider>
     </ChakraProvider>
   );
 };
