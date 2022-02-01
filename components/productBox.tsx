@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-shadow */
 import { Box, Flex } from "@chakra-ui/layout";
 import { ListItem, UnorderedList, Checkbox } from "@chakra-ui/react";
@@ -7,41 +8,28 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 const ProductBox = ({ items }) => {
   const [approved, setApproved] = useState(false);
   const allCarts = useStoreState((state: any) => state.allCarts);
-  const [purchase, setF] = useState([]);
-  const addApprovedCart = useStoreActions(
-    (state: any) => state.addApprovedCart
+  const [purchase, setPurchase] = useState([]);
+  const addPurchaseAction = useStoreActions(
+    (state: any) => state.addPurchaseAction
   );
-  const addDiscardedCart = useStoreActions(
-    (state: any) => state.addDiscardedCart
-  );
-
-  const handleChange = (e) => {
-    let newApproved;
-    const arr = [];
-    setApproved((state) => !state);
-
-    if (approved) {
-      newApproved = allCarts[e.target.value];
-      newApproved.approved = false;
-    } else {
-      newApproved = allCarts[e.target.value];
-      newApproved.approved = true;
-    }
-    arr.push(newApproved);
-    setF(arr);
-  };
 
   useEffect(() => {
-    const approved = [];
-    const rejected = [];
-    if (purchase[0].approved) {
-      approved.push(purchase[0]);
+    addPurchaseAction(purchase);
+  }, [addPurchaseAction, purchase]);
+
+  const handleChange = (e) => {
+    setApproved((state) => !state);
+    let obj;
+
+    if (approved) {
+      obj = { ...allCarts[e.target.value] };
+      obj.approved = false;
     } else {
-      rejected.push(purchase[0]);
+      obj = { ...allCarts[e.target.value] };
+      obj.approved = true;
     }
-    addApprovedCart(approved);
-    addDiscardedCart(rejected);
-  }, [addApprovedCart, addDiscardedCart, purchase]);
+    return setPurchase((data) => [...data, { obj }]);
+  };
 
   return (
     <Box width="20vw" height="38vh" bgColor="gray.100" margin="5px">
