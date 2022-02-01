@@ -1,6 +1,6 @@
 import { Flex, Box } from "@chakra-ui/react";
 
-const NavButton = ({ text }) => {
+const MainButton = ({ text }) => {
   return (
     <Box
       padding="15px"
@@ -21,4 +21,4 @@ const NavButton = ({ text }) => {
   );
 };
 
-export default NavButton;
+export default MainButton;

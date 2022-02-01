@@ -1,6 +1,6 @@
 import { Flex, Box } from "@chakra-ui/react";
 import NextImage from "next/image";
-import NavButton from "./navButton";
+import MainButton from "./button";
 
 const Navbar = () => {
   return (
@@ -15,16 +15,16 @@ const Navbar = () => {
       <Flex align="center">
         <Box width="40%">
           <Flex justify="left" align="left" color="white">
-            <NavButton text="Nav 1" />
+            <MainButton text="Nav 1" />
           </Flex>
         </Box>
         <Box width="20%">
-          <NextImage src="/diet.svg" height="80px" width="220px" />
+          <NextImage src="/xma.svg" height="80px" width="220px" />
         </Box>
         <Box width="40%">
           <Flex justify="right" align="right" color="white">
-            <NavButton text="Nav 2" />
-            <NavButton text="Nav 3" />
+            <MainButton text="Nav 2" />
+            <MainButton text="Nav 3" />
           </Flex>
         </Box>
       </Flex>
