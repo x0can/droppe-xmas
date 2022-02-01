@@ -2,12 +2,13 @@ import { createStore, action } from "easy-peasy";
 
 export const store = createStore({
   allCarts: [],
-  allPurchaseActions: [],
+  allPurchases: [],
 
   addAllCarts: action((state: any, payload) => {
     state.allCarts = payload;
   }),
-  addPurchaseAction: action((state: any, payload) => {
-    state.allPurchaseActions = payload;
+ 
+  addPurchase: action((state: any, payload) => {
+    state.allPurchases = payload;
   }),
 });

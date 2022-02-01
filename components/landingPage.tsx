@@ -2,7 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import ProductLayout from "./productLayout";
 import Navbar from "./navBar";
 
-const LandingPage = ({ children, carts }) => {
+const LandingPage = ({ children, carts, approved, handleSubmit }) => {
   return (
     <Flex top="0">
       <Navbar />
@@ -15,7 +15,11 @@ const LandingPage = ({ children, carts }) => {
           width="100vw"
         >
           {carts !== undefined ? (
-            <ProductLayout carts={carts} />
+            <ProductLayout
+              carts={carts}
+              approved={approved}
+              handleSubmit={handleSubmit}
+            />
           ) : (
             <Box> Waiting for data....</Box>
           )}

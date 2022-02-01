@@ -1,36 +1,10 @@
-/* eslint-disable func-names */
-/* eslint-disable no-shadow */
+/* eslint-disable dot-notation */
+/* eslint-disable no-undef */
 import { Box, Flex } from "@chakra-ui/layout";
-import { ListItem, UnorderedList, Checkbox } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { ListItem, UnorderedList } from "@chakra-ui/react";
+import MainButton from "./button";
 
-const ProductBox = ({ items }) => {
-  const [approved, setApproved] = useState(false);
-  const allCarts = useStoreState((state: any) => state.allCarts);
-  const [purchase, setPurchase] = useState([]);
-  const addPurchaseAction = useStoreActions(
-    (state: any) => state.addPurchaseAction
-  );
-
-  useEffect(() => {
-    addPurchaseAction(purchase);
-  }, [addPurchaseAction, purchase]);
-
-  const handleChange = (e) => {
-    setApproved((state) => !state);
-    let obj;
-
-    if (approved) {
-      obj = { ...allCarts[e.target.value] };
-      obj.approved = false;
-    } else {
-      obj = { ...allCarts[e.target.value] };
-      obj.approved = true;
-    }
-    return setPurchase((data) => [...data, { obj }]);
-  };
-
+const ProductBox = ({ items, approved, handleSubmit }) => {
   return (
     <Box width="20vw" height="38vh" bgColor="gray.100" margin="5px">
       <Flex align="center" justify="center" padding="60px">
@@ -39,11 +13,11 @@ const ProductBox = ({ items }) => {
           <ListItem>products: {items.products.length}</ListItem>
         </UnorderedList>
       </Flex>
-      <Flex align="center" justify="center" padding="10px" margin="2px">
-        <Checkbox onChange={handleChange} isChecked={approved} value={items.id}>
-          Approve
-        </Checkbox>
-      </Flex>
+      {approved?.id === items.id ? (
+        ""
+      ) : (
+        <MainButton text="APPROVE" handleSubmit={handleSubmit} item={items} />
+      )}
     </Box>
   );
 };

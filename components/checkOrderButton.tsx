@@ -1,6 +1,6 @@
 import { Flex, Box } from "@chakra-ui/react";
 
-const MainButton = ({ text, handleSubmit, item }) => {
+const CheckButton = ({ text, handleCheck }) => {
   return (
     <Box
       padding="25px"
@@ -13,7 +13,7 @@ const MainButton = ({ text, handleSubmit, item }) => {
           bg: "green.800",
         },
       }}
-      onClick={() => handleSubmit(item)}
+      onClick={() => handleCheck(true)}
     >
       <Flex justify="center" align="center">
         {text}
@@ -22,4 +22,4 @@ const MainButton = ({ text, handleSubmit, item }) => {
   );
 };
 
-export default MainButton;
+export default CheckButton;
