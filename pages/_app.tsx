@@ -1,0 +1,66 @@
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { StoreProvider } from "easy-peasy";
+import "reset-css";
+import { store } from "../lib/store";
+
+const theme = extendTheme({
+  colors: {
+    green: {
+      100: "#F0F4C3",
+      200: "#E6EE9C",
+      300: "#DCE775",
+      400: "#D4E157",
+      500: "#CDDC39",
+      600: "#C0CA33",
+      700: "#AFB42B",
+      800: "#9E9D24",
+      900: "#827717",
+    },
+    orange: {
+      100: "#FFE0B2",
+      200: "#FFCC80",
+      300: "#FFB74D",
+      400: "#FFA726",
+      500: "#FF9800",
+      600: "#FB8C00",
+      700: "#F57C00",
+      800: "#EF6C00",
+      900: "#E65100",
+    },
+    gray: {
+      100: "#F5F5F5",
+      200: "#EEEEEE",
+      300: "#E0E0E0",
+      400: "#BDBDBD",
+      500: "#9E9E9E",
+      600: "#757575",
+      700: "#616161",
+      800: "#424242",
+      900: "#212121",
+    },
+  },
+  components: {
+    Button: {
+      variants: {
+        link: {
+          ":focus": {
+            outline: "none",
+            boxShadow: "none",
+          },
+        },
+      },
+    },
+  },
+});
+
+const MyApp = ({ Component, pageProps }) => {
+  return (
+    <ChakraProvider theme={theme}>
+      <StoreProvider store={store}>
+        <Component {...pageProps} />
+      </StoreProvider>
+    </ChakraProvider>
+  );
+};
+
+export default MyApp;
