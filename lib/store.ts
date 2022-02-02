@@ -6,6 +6,7 @@ export const store = createStore({
   nonPurchase: [],
   checkoutStep: null,
   duplicates: 1,
+  successOrder: false,
 
   addAllCarts: action((state: any, payload) => {
     state.allCarts = payload;
@@ -24,5 +25,8 @@ export const store = createStore({
   }),
   setDuplicate: action((state: any, payload) => {
     state.duplicates = payload;
+  }),
+  setSuccessOrder: action((state: any, payload) => {
+    state.successOrder = payload;
   }),
 });

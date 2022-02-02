@@ -8,6 +8,7 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import OrderTable from "./abandonedCart";
 import DiscountBox from "./discount";
 import OrderProcessing from "./orderProcessing";
@@ -20,7 +21,15 @@ const CheckoutStep = ({
   handleSubmit,
   loading,
   duplicate,
+  noOptionSelected,
 }) => {
+  const router = useRouter();
+
+  const handleEmptyCart = () => {
+    router.push("/");
+    noOptionSelected();
+  };
+
   return (
     <Box>
       {checkoutStep ? (
@@ -28,7 +37,7 @@ const CheckoutStep = ({
           <Box
             overflow="hidden"
             bgColor="gray.100"
-            height="calc(70vh - 100px)"
+            height="calc(80vh - 100px)"
             padding="30px"
             width="100vw"
             margin="130px 100px 10px "
@@ -88,25 +97,45 @@ const CheckoutStep = ({
                 />
               )}
             </Center>
-            <Flex justify="center" align="center">
-              <Button
-                onClick={handleSubmit}
-                disabled={loading}
-                mt={8}
-                bg="green.900"
-                color="white"
-                rounded="md"
-                _hover={{
-                  transform: "translateY(-2px)",
-                  boxShadow: "lg",
-                  bg: "orange.900",
-                }}
-              >
-                Checkout Step
-                {duplicate === 2 && <DiscountBox text="20% OFF" />}
-                {duplicate >= 3 && <DiscountBox text="30% OFF" />}
-              </Button>
-            </Flex>
+            {nonPurchase.length === 5 ? (
+              <Flex justify="center" align="center">
+                <Button
+                  onClick={handleEmptyCart}
+                  disabled={loading}
+                  mt={8}
+                  bg="orange.900"
+                  color="white"
+                  rounded="md"
+                  _hover={{
+                    transform: "translateY(-2px)",
+                    boxShadow: "lg",
+                    bg: "orange.400",
+                  }}
+                >
+                  Go back to select items
+                </Button>
+              </Flex>
+            ) : (
+              <Flex justify="center" align="center">
+                <Button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  mt={8}
+                  bg="green.900"
+                  color="white"
+                  rounded="md"
+                  _hover={{
+                    transform: "translateY(-2px)",
+                    boxShadow: "lg",
+                    bg: "orange.900",
+                  }}
+                >
+                  Checkout Step
+                  {duplicate === 2 && <DiscountBox text="20% OFF" />}
+                  {duplicate >= 3 && <DiscountBox text="30% OFF" />}
+                </Button>
+              </Flex>
+            )}
           </Box>
         </Flex>
       ) : (
