@@ -1,8 +1,24 @@
-import { Table, Thead, Flex, Center, Text, Badge, Box } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Flex,
+  Center,
+  Text,
+  Badge,
+  Box,
+  Button,
+} from "@chakra-ui/react";
 import OrderTable from "./abandonedCart";
 import OrderProcessing from "./orderProcessing";
 
-const CheckoutStep = ({ checkoutStep, allPurchases, nonPurchase, carts }) => {
+const CheckoutStep = ({
+  checkoutStep,
+  allPurchases,
+  nonPurchase,
+  carts,
+  handleSubmit,
+  loading,
+}) => {
   return (
     <Box>
       {checkoutStep ? (
@@ -70,6 +86,9 @@ const CheckoutStep = ({ checkoutStep, allPurchases, nonPurchase, carts }) => {
                 />
               )}
             </Center>
+            <Button onClick={handleSubmit} disabled={loading}>
+              Checkout Step
+            </Button>
           </Box>
         </Flex>
       ) : (

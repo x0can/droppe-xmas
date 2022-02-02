@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { add, fetcher } from "./fetcher";
+import { fetchWithArgs, fetcher } from "./fetcher";
 
 export const useCarts = () => {
   const { data, error } = useSWR("https://fakestoreapi.com/carts", fetcher);
@@ -10,8 +10,10 @@ export const useCarts = () => {
   };
 };
 
-export const usePost = () => {
-  const { data, error } = useSWR("https://fakestoreapi.com/carts", add);
+export const usePost = (obj) => {
+  const { data, error } = useSWR("https://fakestoreapi.com/carts", (url) =>
+    fetchWithArgs(url, obj)
+  );
 
   return {
     order: data,
