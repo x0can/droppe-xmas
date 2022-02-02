@@ -12,4 +12,5 @@ export const arrayReducer = (arr) => {
   if (arr.length === 5) {
     return arr;
   }
+  return arr
 };

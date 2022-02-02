@@ -9,31 +9,22 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { FaCartArrowDown } from "react-icons/fa";
 import ProductLayout from "./productLayout";
 import LandingPage from "./landingPage";
 import OrderTable from "./orderTable";
 import { arrayRemove, arrayReducer } from "../lib/filter";
 import { compareArray } from "../lib/compare";
-import { useCarts } from "../lib/hooks";
 
-const OrderProcessing = () => {
-  const { cart } = useCarts();
+const OrderProcessing = ({ carts }) => {
   const [approved, setApproved] = useState();
 
   const addPurchase = useStoreActions((state: any) => state.addPurchase);
   const allPurchases = useStoreState((state: any) => state.allPurchases);
   const addNonPurchase = useStoreActions((store: any) => store.addNonPurchase);
   const addAllCarts = useStoreActions((store: any) => store.addAllCarts);
-  const carts = useStoreState((state: any) => state.allCarts);
   const setCheckout = useStoreActions((state: any) => state.setCheckout);
-
-  useEffect(() => {
-    if (cart?.length > 0) {
-      addAllCarts(cart);
-    }
-  }, [addAllCarts, cart]);
 
   const handleSubmit = (item) => {
     allPurchases.push(item);
@@ -48,8 +39,7 @@ const OrderProcessing = () => {
   };
 
   const handlePurchaseOrder = () => {
-    const arr1 = arrayReducer(carts);
-    const notPurchased = compareArray(arr1, allPurchases);
+    const notPurchased = compareArray(carts, allPurchases);
     addNonPurchase(notPurchased);
     setCheckout(true);
   };
