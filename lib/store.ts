@@ -4,7 +4,7 @@ export const store = createStore({
   allCarts: [],
   allPurchases: [],
   nonPurchase: [],
-  activePurchase: null,
+  checkoutStep: null,
 
   addAllCarts: action((state: any, payload) => {
     state.allCarts = payload;
@@ -18,7 +18,7 @@ export const store = createStore({
     state.nonPurchase = payload;
   }),
 
-  setApproved: action((state: any, payload) => {
-    state.activePurchase = payload;
+  setCheckout: action((state: any, payload) => {
+    state.checkoutStep = payload;
   }),
 });

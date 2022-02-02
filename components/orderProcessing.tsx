@@ -14,7 +14,7 @@ import { FaCartArrowDown } from "react-icons/fa";
 import ProductLayout from "./productLayout";
 import LandingPage from "./landingPage";
 import OrderTable from "./orderTable";
-import { arrayRemove } from "../lib/filter";
+import { arrayRemove, arrayReducer } from "../lib/filter";
 import { compareArray } from "../lib/compare";
 import { useCarts } from "../lib/hooks";
 
@@ -27,6 +27,7 @@ const OrderProcessing = () => {
   const addNonPurchase = useStoreActions((store: any) => store.addNonPurchase);
   const addAllCarts = useStoreActions((store: any) => store.addAllCarts);
   const carts = useStoreState((state: any) => state.allCarts);
+  const setCheckout = useStoreActions((state: any) => state.setCheckout);
 
   useEffect(() => {
     if (cart?.length > 0) {
@@ -40,26 +41,17 @@ const OrderProcessing = () => {
     return setApproved(item);
   };
 
-  const arrayReducer = (arr) => {
-    if (arr.length > 5) {
-      arr.length -= 1;
-      return arr;
-    }
-    if (arr.length === 5) {
-      return arr;
-    }
-  };
-
   const handleDelete = (item) => {
     const newArray = arrayRemove(allPurchases, item);
-
-    return addPurchase(newArray);
+    addPurchase(newArray);
+    addAllCarts(carts);
   };
 
   const handlePurchaseOrder = () => {
     const arr1 = arrayReducer(carts);
     const notPurchased = compareArray(arr1, allPurchases);
     addNonPurchase(notPurchased);
+    setCheckout(true);
   };
 
   if (!arrayReducer(carts)) {
@@ -103,7 +95,7 @@ const OrderProcessing = () => {
           zIndex={1}
           onClick={handlePurchaseOrder}
         >
-          <Link href="/checkout">
+          <Link href="#/checkout">
             <Text>
               <IconButton
                 colorScheme="white"
