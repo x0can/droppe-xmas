@@ -8,14 +8,15 @@ import {
   Text,
   Badge,
 } from "@chakra-ui/react";
-import { useStoreActions, useStoreState } from "easy-peasy";
-import {  useState } from "react";
+import { useStore, useStoreActions, useStoreState } from "easy-peasy";
+import { useState } from "react";
 import { FaCartArrowDown } from "react-icons/fa";
 import ProductLayout from "./productLayout";
 import LandingPage from "./landingPage";
 import OrderTable from "./orderTable";
 import { arrayRemove, arrayReducer } from "../lib/filter";
 import { compareArray } from "../lib/compare";
+import { calculateDiscount } from "../lib/discount";
 
 const OrderProcessing = ({ carts }) => {
   const [approved, setApproved] = useState();
@@ -25,6 +26,7 @@ const OrderProcessing = ({ carts }) => {
   const addNonPurchase = useStoreActions((store: any) => store.addNonPurchase);
   const addAllCarts = useStoreActions((store: any) => store.addAllCarts);
   const setCheckout = useStoreActions((state: any) => state.setCheckout);
+  const setDuplicate = useStoreActions((state: any) => state.setDuplicate);
 
   const handleSubmit = (item) => {
     allPurchases.push(item);
@@ -42,6 +44,7 @@ const OrderProcessing = ({ carts }) => {
     const notPurchased = compareArray(carts, allPurchases);
     addNonPurchase(notPurchased);
     setCheckout(true);
+    setDuplicate(calculateDiscount(allPurchases));
   };
 
   if (!arrayReducer(carts)) {

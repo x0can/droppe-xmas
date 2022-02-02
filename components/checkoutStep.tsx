@@ -9,6 +9,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import OrderTable from "./abandonedCart";
+import DiscountBox from "./discount";
 import OrderProcessing from "./orderProcessing";
 
 const CheckoutStep = ({
@@ -18,6 +19,7 @@ const CheckoutStep = ({
   carts,
   handleSubmit,
   loading,
+  duplicate,
 }) => {
   return (
     <Box>
@@ -86,9 +88,25 @@ const CheckoutStep = ({
                 />
               )}
             </Center>
-            <Button onClick={handleSubmit} disabled={loading}>
-              Checkout Step
-            </Button>
+            <Flex justify="center" align="center">
+              <Button
+                onClick={handleSubmit}
+                disabled={loading}
+                mt={8}
+                bg="green.900"
+                color="white"
+                rounded="md"
+                _hover={{
+                  transform: "translateY(-2px)",
+                  boxShadow: "lg",
+                  bg: "orange.900",
+                }}
+              >
+                Checkout Step
+              {duplicate === 2 && <DiscountBox text="20% OFF" />}
+              {duplicate >= 3 && <DiscountBox text="30% OFF" />}
+              </Button>
+            </Flex>
           </Box>
         </Flex>
       ) : (
