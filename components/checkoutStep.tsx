@@ -103,8 +103,8 @@ const CheckoutStep = ({
                 }}
               >
                 Checkout Step
-              {duplicate === 2 && <DiscountBox text="20% OFF" />}
-              {duplicate >= 3 && <DiscountBox text="30% OFF" />}
+                {duplicate === 2 && <DiscountBox text="20% OFF" />}
+                {duplicate >= 3 && <DiscountBox text="30% OFF" />}
               </Button>
             </Flex>
           </Box>
