@@ -15,7 +15,7 @@ const CheckButton = ({ text, handleCheck }) => {
         boxShadow: "lg",
         bg: "orange.900",
       }}
-      onClick={() => handleCheck(true)}
+      onClick={() => handleCheck}
     >
       <Flex justify="center" align="center">
         {text}
