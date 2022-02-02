@@ -4,7 +4,7 @@ import ProductBox from "./productBox";
 
 const ProductLayout = ({ carts, handleSubmit }) => {
   return (
-    <Flex padding="20">
+    <Flex justify="center">
       {carts.map((items) => (
         <Fragment key={items.id || items.userId}>
           <ProductBox items={items} handleSubmit={handleSubmit} />

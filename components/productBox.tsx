@@ -1,5 +1,3 @@
-/* eslint-disable dot-notation */
-/* eslint-disable no-undef */
 import {
   Heading,
   Box,
@@ -10,9 +8,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-// import MainButton from "./button";
-
 const ProductBox = ({ items, handleSubmit }) => {
+
   return (
     <Center py={6}>
       <Box
@@ -22,7 +19,7 @@ const ProductBox = ({ items, handleSubmit }) => {
         boxShadow="2xl"
         rounded="md"
         overflow="hidden"
-        padding="60px"
+        padding="50px"
         margin="3px"
       >
         <Box p={6}>
@@ -49,19 +46,9 @@ const ProductBox = ({ items, handleSubmit }) => {
         >
           Approve
         </Button>
-        {/* <MainButton text="APPROVE" handleSubmit={handleSubmit} item={items} /> */}
       </Box>
     </Center>
   );
 };
-// <Box width="20vw" height="38vh" bgColor="orange.300" margin="5px">
-//   <Flex align="center" justify="center" padding="60px">
-//     <UnorderedList>
-//       <ListItem>child: {items.userId}</ListItem>
-//       <ListItem>products: {items.products.length}</ListItem>
-//     </UnorderedList>
-//   </Flex>
-//   <MainButton text="APPROVE" handleSubmit={handleSubmit} item={items} />
-// </Box>
 
 export default ProductBox;

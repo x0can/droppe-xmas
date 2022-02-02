@@ -14,8 +14,18 @@ const OrderTable = ({ orders, handleDelete }) => {
   });
 
   return (
-    <Table variant="styled" backgroundColor="orange.300" width="81.5vw">
-      <Thead borderBottom="1px solid" borderColor="rgba(255,255,255,0.2)">
+    <Table
+      boxShadow="2xl"
+      variant="styled"
+      backgroundColor="gray.100"
+      width="60vw"
+      rounded="md"
+    >
+      <Thead
+        borderBottom="1px solid"
+        borderColor="rgba(255,255,255,0.2)"
+        id="orderTable"
+      >
         <Tr>
           <Th>#</Th>
           <Th>CHILD</Th>
@@ -31,7 +41,7 @@ const OrderTable = ({ orders, handleDelete }) => {
             sx={{
               transition: "all .3s",
               "&:hover": {
-                bg: "orange.500",
+                bg: "gray.500",
               },
             }}
             key={order.id}

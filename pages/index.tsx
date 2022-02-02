@@ -1,24 +1,30 @@
-import { Flex, Box } from "@chakra-ui/layout";
+/* eslint-disable no-unused-vars */
+import {
+  Flex,
+  Box,
+  Center,
+  Link,
+  IconButton,
+  Text,
+  Badge,
+} from "@chakra-ui/react";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { FaCartArrowDown } from "react-icons/fa";
 import ProductLayout from "../components/productLayout";
 import LandingPage from "../components/landingPage";
 import OrderTable from "../components/orderTable";
-import CheckButton from "../components/checkOrderButton";
 import { arrayRemove } from "../lib/filter";
 import { compareArray } from "../lib/compare";
 import { useCarts } from "../lib/hooks";
-import SubmitButton from "../components/submitOrder";
 
 const Home = () => {
   const { cart } = useCarts();
-  const [checkOrder, setCheckOrder] = useState(false);
-  const [orders, setOrders] = useState();
-  const [message, setMessage] = useState();
   const [approved, setApproved] = useState();
+
   const addPurchase = useStoreActions((state: any) => state.addPurchase);
   const allPurchases = useStoreState((state: any) => state.allPurchases);
-
+  const addNonPurchase = useStoreActions((store: any) => store.addNonPurchase);
   const addAllCarts = useStoreActions((store: any) => store.addAllCarts);
   const carts = useStoreState((state: any) => state.allCarts);
 
@@ -29,10 +35,9 @@ const Home = () => {
   }, [addAllCarts, cart]);
 
   const handleSubmit = (item) => {
-    setCheckOrder(true);
     allPurchases.push(item);
     addPurchase(allPurchases);
-    setApproved(item);
+    return setApproved(item);
   };
 
   const arrayReducer = (arr) => {
@@ -45,20 +50,16 @@ const Home = () => {
     }
   };
 
-  const handleCheck = () => {
-    setOrders(allPurchases);
-  };
-
   const handleDelete = (item) => {
     const newArray = arrayRemove(allPurchases, item);
-    addPurchase(newArray);
-    return handleCheck();
+
+    return addPurchase(newArray);
   };
 
   const handlePurchaseOrder = () => {
     const arr1 = arrayReducer(carts);
     const notPurchased = compareArray(arr1, allPurchases);
-    console.log(notPurchased);
+    addNonPurchase(notPurchased);
   };
 
   if (!arrayReducer(carts)) {
@@ -67,47 +68,53 @@ const Home = () => {
 
   return (
     <LandingPage>
-      <Box overflowY="auto">
+      <Flex overflowY="auto" align="center" justify="center">
         <Box
           overflow="hidden"
           bgColor="gray.100"
-          height="60vh"
+          height="50vh"
           padding="30px"
           width="100vw"
+          margin="130px 100px 10px "
+          boxShadow="2xl"
         >
-          {carts !== undefined ? (
-            <ProductLayout
-              carts={arrayReducer(carts)}
-              handleSubmit={handleSubmit}
-            />
-          ) : (
-            <Box> Waiting for data....</Box>
-          )}
+          <ProductLayout
+            carts={arrayReducer(carts)}
+            handleSubmit={handleSubmit}
+          />
         </Box>
-      </Box>
-      <Box bg="gray.200" height="100vh">
+      </Flex>
+      <Box bg="gray.200" height="100vh" p={6}>
         <Flex align="center" justify="center" padding="20px">
           {allPurchases ? (
-            <CheckButton text="VIEW ORDER" handleCheck={handleCheck} />
+            <Flex align="center" justify="center" padding="20px">
+              <Center>
+                <OrderTable orders={allPurchases} handleDelete={handleDelete} />
+              </Center>
+            </Flex>
           ) : (
             ""
           )}
         </Flex>
-        {checkOrder ? (
-          <>
-            <Flex align="center" justify="center" padding="20px">
-              <OrderTable orders={orders} handleDelete={handleDelete} />
-            </Flex>
-            <Flex align="center" justify="center" padding="20px">
-              <SubmitButton
-                text="CHECKOUT"
-                handleSubmit={handlePurchaseOrder}
+        <Box
+          position="fixed"
+          top="50px"
+          right={["16px", "84px"]}
+          zIndex={1}
+          onClick={handlePurchaseOrder}
+        >
+          <Link href="/checkout">
+            <Text>
+              <IconButton
+                colorScheme="white"
+                size="lg"
+                aria-label="checkout"
+                icon={<FaCartArrowDown fontSize="50px" color="orange" />}
               />
-            </Flex>
-          </>
-        ) : (
-          ""
-        )}
+              <Badge colorScheme="orange">{allPurchases.length}</Badge>
+            </Text>
+          </Link>
+        </Box>
       </Box>
     </LandingPage>
   );
