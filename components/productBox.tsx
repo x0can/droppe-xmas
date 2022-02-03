@@ -1,25 +1,24 @@
 import {
   Heading,
   Box,
-  Center,
+  Flex,
   Text,
   Stack,
   useColorModeValue,
-  Button,
 } from "@chakra-ui/react";
+import ProductTable from "./productTable";
 
-const ProductBox = ({ items, handleSubmit }) => {
-
+const ProductBox = ({ items }) => {
   return (
-    <Center py={6}>
+    <Flex py={6}>
       <Box
-        maxW="270px"
+        maxW="270vw"
         w="full"
         bg={useColorModeValue("white", "gray.800")}
         boxShadow="2xl"
         rounded="md"
         overflow="hidden"
-        padding="50px"
+        padding="20px"
         margin="3px"
       >
         <Box p={6}>
@@ -28,26 +27,11 @@ const ProductBox = ({ items, handleSubmit }) => {
               Child: {items.userId}
             </Heading>
             <Text color="gray.500">Products</Text>
-            <Text fontWeight={600}>{items.products.length}</Text>
+            <ProductTable products={items.products} childId={items.userId} />
           </Stack>
         </Box>
-        <Button
-          w="full"
-          onClick={() => handleSubmit(items)}
-          mt={8}
-          bg="green.900"
-          color="white"
-          rounded="md"
-          _hover={{
-            transform: "translateY(-2px)",
-            boxShadow: "lg",
-            bg: "orange.900",
-          }}
-        >
-          Approve
-        </Button>
       </Box>
-    </Center>
+    </Flex>
   );
 };
 

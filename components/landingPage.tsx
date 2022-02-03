@@ -3,16 +3,19 @@ import Navbar from "./navBar";
 
 const LandingPage = ({ children }) => {
   return (
-    <Flex top="0">
+    <Box top="0">
       <Navbar />
-      <Box
-        overflowY="auto"
-        backgroundImage="url(/temple.svg)"
-        backgroundColor="gray.400"
-      >
-        {children}
-      </Box>
-    </Flex>
+      <Flex justify="center" padding="center">
+        <Box
+          width="100vw"
+          overflowY="auto"
+          backgroundImage="url(/temple.svg)"
+          backgroundColor="gray.400"
+        >
+          {children}
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 

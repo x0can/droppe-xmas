@@ -1,63 +1,22 @@
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useEffect, useState } from "react";
 import { ChakraProvider, Container } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import CheckoutStep from "../components/checkoutStep";
 import LandingPage from "../components/landingPage";
 import { useCarts } from "../lib/hooks";
-import { submitAction } from "../lib/submit";
 import { MotionBox } from "../components/motionBox";
+import { arrayReducer } from "../lib/filter";
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
   const { cart, isLoading } = useCarts();
-  const router = useRouter();
-  const nonPurchase = useStoreState((state: any) => state.nonPurchase);
-  const allPurchases = useStoreState((state: any) => state.allPurchases);
-  const checkoutStep = useStoreState((state: any) => state.checkoutStep);
-  const addAllCarts = useStoreActions((store: any) => store.addAllCarts);
-  const setCheckout = useStoreActions((state: any) => state.setCheckout);
   const carts = useStoreState((state: any) => state.allCarts);
-  const duplicates = useStoreState((state: any) => state.duplicates);
-  const successOrder = useStoreState((state: any) => state.successOrder);
-  const setSuccessOrder = useStoreActions(
-    (state: any) => state.setSuccessOrder
-  );
-  const addPurchase = useStoreActions((state: any) => state.addPurchase);
+  const addAllCarts = useStoreActions((store: any) => store.addAllCarts);
 
-  useEffect(() => {
-    if (successOrder) {
-      setCheckout(false);
-      setSuccessOrder(false);
-      addPurchase([]);
-      router.push("/success");
-    }
-  });
   useEffect(() => {
     if (cart?.length > 0) {
-      addAllCarts(cart);
+      addAllCarts(arrayReducer(cart));
     }
   }, [addAllCarts, cart]);
-
-  const noOptionSelected = () => {
-    setCheckout(false);
-  };
-
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      allPurchases.forEach(async (purchase) => {
-        await submitAction(purchase);
-        nonPurchase.forEach(async (reject) => {
-          await submitAction(reject);
-          setLoading(false);
-          setSuccessOrder(true);
-        });
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   if (isLoading) {
     return (
@@ -96,16 +55,7 @@ const Home = () => {
 
   return (
     <LandingPage>
-      <CheckoutStep
-        nonPurchase={nonPurchase}
-        allPurchases={allPurchases}
-        checkoutStep={checkoutStep}
-        carts={carts}
-        handleSubmit={handleSubmit}
-        loading={loading}
-        duplicate={duplicates}
-        noOptionSelected={noOptionSelected}
-      />
+      <CheckoutStep carts={carts} />
     </LandingPage>
   );
 };
