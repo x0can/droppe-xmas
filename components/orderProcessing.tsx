@@ -6,6 +6,11 @@ import {
   Link,
   IconButton,
   Text,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
   Badge,
 } from "@chakra-ui/react";
 import { useStore, useStoreActions, useStoreState } from "easy-peasy";
@@ -69,13 +74,28 @@ const OrderProcessing = ({ carts }) => {
           />
         </Box>
       </Flex>
-      <Box bg="gray.200" height="100vh" p={6}>
+      <Box bg="gray.200" p={6}>
         <Flex align="center" justify="center" padding="20px">
-          {allPurchases ? (
-            <Flex align="center" justify="center" padding="20px">
-              <Center>
-                <OrderTable orders={allPurchases} handleDelete={handleDelete} />
-              </Center>
+          {allPurchases.length !== 0 ? (
+            <Flex
+              padding="20px"
+              align="center"
+              justify="center"
+              alignItems="center"
+            >
+              <List spacing={3} alignContent="center">
+                <ListItem margin="20px">
+                  <Box width="100%">Click on table column to view products</Box>
+                </ListItem>
+                <ListItem>
+                  <Box width="100%">
+                    <OrderTable
+                      orders={allPurchases}
+                      handleDelete={handleDelete}
+                    />
+                  </Box>
+                </ListItem>
+              </List>
             </Flex>
           ) : (
             ""
