@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <LandingPage
-      orders={carts}
+      orders={arrayReducer(carts)}
       handleProducts={handleProducts}
       products={products}
       handleDelete={handleDelete}
