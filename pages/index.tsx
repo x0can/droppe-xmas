@@ -1,31 +1,43 @@
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 import { useEffect, useState } from "react";
 import LandingPage from "../components/landingPage";
 import { useCarts } from "../lib/hooks";
 import { arrayReducer, arrayRemove } from "../lib/filter";
 import LoadingData from "../components/loadingData";
 
+const arr = [];
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [child, setChild] = useState();
-  const addAllCarts = useStoreActions((store: any) => store.addAllCarts);
-  const carts = useStoreState((state: any) => state.allCarts);
-  const { cart, isLoading } = useCarts();
+  const addProducts = useStoreActions((store: any) => store.addProducts);
+  const { orders, isLoading } = useCarts();
+  const [carts, setCarts] = useState();
+  const [approved, setApproved] = useState([]);
 
   useEffect(() => {
-    if (cart?.length > 0) {
-      addAllCarts(arrayReducer(cart));
+    if (!isLoading) {
+      const reduced = arrayReducer(orders);
+      setCarts(reduced);
     }
-  }, [addAllCarts, cart]);
+  }, [isLoading, orders]);
 
   const handleProducts = (order, orderProducts) => {
     setChild(order);
     setProducts(orderProducts);
+    addProducts(orderProducts);
   };
 
   const handleDelete = (product) => {
     const newProducts = arrayRemove(products, product);
     setProducts(newProducts);
+  };
+
+  const handleCheck = (bool, product) => {
+    if (bool) {
+      handleDelete(product);
+      arr.push(product);
+      setApproved(arr);
+    }
   };
 
   if (isLoading) {
@@ -34,10 +46,11 @@ const Home = () => {
 
   return (
     <LandingPage
-      orders={arrayReducer(carts)}
+      orders={carts}
       handleProducts={handleProducts}
       products={products}
-      handleDelete={handleDelete}
+      setIsChecked={handleCheck}
+      approved={approved}
     />
   );
 };
