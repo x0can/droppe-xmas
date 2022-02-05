@@ -1,4 +1,13 @@
-import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Button,
+  Checkbox,
+} from "@chakra-ui/react";
 import { formatDate } from "../lib/formatter";
 
 const OrderTable = ({ orders, handleProducts }) => {
@@ -20,6 +29,7 @@ const OrderTable = ({ orders, handleProducts }) => {
           <Th>CHILD</Th>
           <Th>DATE</Th>
           <Th>PRODUCTS</Th>
+          <Th />
         </Tr>
       </Thead>
       <Tbody>
@@ -39,6 +49,19 @@ const OrderTable = ({ orders, handleProducts }) => {
             <Td>{order.userId}</Td>
             <Td>{formatDate(new Date(order.date))}</Td>
             <Td>{order.products.length}</Td>
+            <Td>
+              {" "}
+              <Button
+                rounded="full"
+                px={6}
+                colorScheme="orange"
+                bg="green.400"
+                _hover={{ bg: "orange.500" }}
+                id="productsTable"
+              >
+                <Checkbox />
+              </Button>
+            </Td>
           </Tr>
         ))}
       </Tbody>

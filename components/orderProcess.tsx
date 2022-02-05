@@ -73,11 +73,7 @@ const Orderprocess = ({
                   products
                 </Text>
               </Heading>
-              <ProductsTable
-                products={products}
-                setIsChecked={setIsChecked}
-                counts={counts}
-              />
+              <ProductsTable products={products} setIsChecked={setIsChecked} />
             </>
           ) : null}
         </Stack>
